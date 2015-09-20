@@ -21,14 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
       for (var c = 0; c < col; c++) {
 
         var gridCell = grid.appendChild(document.createElement('div'));
-        gridCell.id = name + 'Cell_' + c;
+        count++;
+        gridCell.id = name + 'Cell_' + count;
         gridCell.className = name + 'Cell';
-
-        //gridCell.addEventListener('click', (function())
+        gridCell.addEventListener('click', clickEvent);
 
       }
 
     }
+
     console.log(grid);
     document.getElementById('pixelPainter').appendChild(grid);
 
@@ -78,5 +79,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   setColor();
 
+  //set the clickEvent function
+
+  function clickEvent(e) {
+
+    console.log(this.id + ' was clicked');
+
+  }
+
 });
+
+
 
