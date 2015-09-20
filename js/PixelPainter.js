@@ -1,4 +1,8 @@
+//function to render functionality
+
 document.addEventListener('DOMContentLoaded', function() {
+
+  //function to create grids with a unique id, row #, & column #
 
   function PixelPainter( name, row, col ) {
 
@@ -29,8 +33,50 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('pixelPainter').appendChild(grid);
 
   }
-  PixelPainter('swatch', 5, 5);
+
+  //intatiate two grids one for the color swatch and one for the canvas
+
+  PixelPainter('swatch', 4, 4);
   PixelPainter('canvas', 10, 10);
+
+  //function to set the 16 primary (named) colors to the swatch
+
+  function setColor() {
+
+    colorArray = [
+
+      'black',
+      'gray',
+      'silver',
+      'white',
+      'maroon',
+      'red',
+      'olive',
+      'yellow',
+      'green',
+      'lime',
+      'teal',
+      'aqua',
+      'navy',
+      'blue',
+      'purple',
+      'fuchsia'
+
+    ];
+
+    var swatchList = document.querySelectorAll('.swatchCell');
+
+    for (var i = 0; i < swatchList.length; i++) {
+
+      swatchList[i].style.backgroundColor = colorArray[i];
+
+    }
+
+  }
+
+  //get that color onto the swatch
+
+  setColor();
 
 });
 

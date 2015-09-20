@@ -1,6 +1,6 @@
-#swatch           {}
+#swatch           {display: inline-block;border: 1px solid gray;}
 .swatchRow        {}
-.swatchCell       {display: inline-block;width: 20px; height: 20px;border: 1px solid black;background-color: #FFF;}
+.swatchCell       {display: inline-block;width: 25px; height: 25px;background-color: #FFF;}
 
 #canvas           {}
 .canvasRow        {}
