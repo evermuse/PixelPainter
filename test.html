@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  <script src="./js/Canvas.js"></script>
+  <script src="./js/Swatch.js"></script>
+</head>
+<body>
+
+<div id="mocha"></div>
+
+<script src="node_modules/chai/chai.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.3.2/mocha.min.js"></script>
+<script>mocha.setup('bdd');</script>
+
+<script src='./test/test-script.js'></script>
+
+<script>mocha.run();</script>
+
+</body>
+</html>
