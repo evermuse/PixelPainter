@@ -1,4 +1,4 @@
-// create Module (can be within or without the above listener function)
+//create Module
 
 var pixelPainterModule = (function() {
 
@@ -12,6 +12,8 @@ var pixelPainterModule = (function() {
     clear : _clear
 
   };
+
+  //globals
 
   var currentColor = 'black';
   var currentColorDisplay;
@@ -101,7 +103,6 @@ var pixelPainterModule = (function() {
     currentColorDisplay.id = 'currentColorDisplay';
     swatch.appendChild(currentColorDisplay);
 
-
     //erase button
 
     eraseButton = document.createElement('button');
@@ -128,10 +129,13 @@ var pixelPainterModule = (function() {
     if (eraseButton.value === 'off') {
 
       eraseButton.value = 'on';
+      currentColorDisplay.style.backgroundColor = 'white';
+      currentColorDisplay.innerHTML = 'Erase Mode';
 
     } else if (eraseButton.value === 'on') {
 
       eraseButton.value = 'off';
+      currentColorDisplay.innerHTML = '';
 
     }
 
@@ -167,10 +171,19 @@ var pixelPainterModule = (function() {
 
   function paintColorClickEvent(e) {
 
-    console.log(currentColor);
-    this.style.backgroundColor = currentColor;
-
     console.log(this.id + ' was clicked');
+
+    if (eraseButton.value === 'on') {
+
+      this.style.backgroundColor = 'white';
+      console.log(currentColor + ' erased');
+
+    } else {
+
+      this.style.backgroundColor = currentColor;
+      console.log(currentColor);
+
+    }
 
   }
 
@@ -184,7 +197,7 @@ var pixelPainterModule = (function() {
 
     //make canvas grid
 
-    _makeGrid('canvas', 16, 16);
+    _makeGrid('canvas', 25, 25);
 
     //give the swatch its color
 

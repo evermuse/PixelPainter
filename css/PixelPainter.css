@@ -6,12 +6,12 @@
 
 /* option panel styles */
 
-#currentColorDisplay  {width: 100px;height: 25px;border: 1px solid gray;}
-.button               {width: 50px;height: 25px;}
+#currentColorDisplay  {width: 98px;height: 25px;border: 1px solid gray;text-align: center;font-size: 20px;color:red;}
+.button               {width: 50px;height: 25px;text-align: center;}
 
 /* canvas styles */
 
 #canvas               {display: inline-block;margin-left: 200px;border: 1px solid gray;}
 .canvasRow            {}
-.canvasCell           {display: inline-block;width: 40px; height: 40px;background-color: #FFF;}
+.canvasCell           {display: inline-block;width: 25px; height: 25px;background-color: #FFF;}
 
