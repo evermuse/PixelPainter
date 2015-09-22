@@ -1,12 +1,20 @@
-//function to render functionality
+// create Module (can be within or without the above listener function)
 
-document.addEventListener('DOMContentLoaded', function() {
+var pixelPainterModule = (function() {
 
-  //function to create grids with a unique id, row #, & column #
+  var module = {
 
-  function PixelPainter( name, row, col ) {
+    makeGrid : _makeGrid,
+    setSwatchColor : _setSwatchColor,
+    init : _init
 
-    this.name = name;
+  };
+
+  var currentColor = 'black';
+
+  //where the grids get made
+
+  function _makeGrid( name, row, col ) {
 
     var grid = document.createElement('section');
     grid.id = name;
@@ -24,25 +32,28 @@ document.addEventListener('DOMContentLoaded', function() {
         count++;
         gridCell.id = name + 'Cell_' + count;
         gridCell.className = name + 'Cell';
-        gridCell.addEventListener('click', clickEvent);
+
+        if (name === 'swatch') {
+
+          gridCell.addEventListener('click', setColorClickEvent);
+
+        } else {
+
+          gridCell.addEventListener('click', paintColorClickEvent);
+
+        }
 
       }
 
     }
 
-    console.log(grid);
     document.getElementById('pixelPainter').appendChild(grid);
 
   }
 
-  //intatiate two grids one for the color swatch and one for the canvas
-
-  PixelPainter('swatch', 4, 4);
-  PixelPainter('canvas', 10, 10);
-
   //function to set the 16 primary (named) colors to the swatch
 
-  function setColor() {
+  function _setSwatchColor() {
 
     colorArray = [
 
@@ -75,19 +86,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
   }
 
-  //get that color onto the swatch
+  //sets currentColor to clicked cell
 
-  setColor();
+  function setColorClickEvent(e) {
 
-  //set the clickEvent function
-
-  function clickEvent(e) {
+    currentColor = this.style.backgroundColor;
+    console.log(currentColor);
 
     console.log(this.id + ' was clicked');
 
   }
 
+  //sets the clicked cell to currentColor
+
+  function paintColorClickEvent(e) {
+
+    console.log(currentColor);
+    console.log(this.id + ' was clicked');
+    this.style.backgroundColor = currentColor;
+
+  }
+
+  function _init() {
+
+    //make two grids one for the color swatch and one for the canvas
+
+    _makeGrid('swatch', 4, 4);
+    _makeGrid('canvas', 16, 16);
+
+    //give the swatch its color
+
+    _setSwatchColor();
+
+  }
+
+  return module;
+
+})();
+
+//function to render functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  pixelPainterModule.init();
+
 });
-
-
-
