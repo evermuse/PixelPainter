@@ -6,11 +6,16 @@ var pixelPainterModule = (function() {
 
     makeGrid : _makeGrid,
     setSwatchColor : _setSwatchColor,
-    init : _init
+    init : _init,
+    optionPanel : _optionPanel,
+    erase : _erase,
+    clear : _clear
 
   };
 
   var currentColor = 'black';
+  var currentColorDisplay;
+  var eraseButton;
 
   //where the grids get made
 
@@ -86,12 +91,73 @@ var pixelPainterModule = (function() {
 
   }
 
+  //create option panel w/ buttons and current color headsUp display
+
+  function _optionPanel() {
+
+    //display for currentColor
+
+    currentColorDisplay = document.createElement('div');
+    currentColorDisplay.id = 'currentColorDisplay';
+    swatch.appendChild(currentColorDisplay);
+
+
+    //erase button
+
+    eraseButton = document.createElement('button');
+    eraseButton.className = 'button';
+    eraseButton.value = 'off';
+    eraseButton.addEventListener('click', _erase);
+    eraseButton.innerHTML = 'Erase';
+    swatch.appendChild(eraseButton);
+
+    //clear button
+
+    var clearButton = document.createElement('button');
+    clearButton.className = 'button';
+    clearButton.addEventListener('click', _clear);
+    clearButton.innerHTML = 'Clear';
+    swatch.appendChild(clearButton);
+
+  }
+
+  //erases the current cell
+
+  function _erase() {
+
+    if (eraseButton.value === 'off') {
+
+      eraseButton.value = 'on';
+
+    } else if (eraseButton.value === 'on') {
+
+      eraseButton.value = 'off';
+
+    }
+
+  }
+
+  //clears the canvas
+
+  function _clear() {
+
+    var canvasCells = document.querySelectorAll('.canvasCell');
+
+    for (var i = 0; i < canvasCells.length; i++) {
+
+      canvasCells[i].style.backgroundColor = 'white';
+
+    }
+
+  }
+
   //sets currentColor to clicked cell
 
   function setColorClickEvent(e) {
 
     currentColor = this.style.backgroundColor;
     console.log(currentColor);
+    currentColorDisplay.style.backgroundColor = currentColor;
 
     console.log(this.id + ' was clicked');
 
@@ -102,21 +168,31 @@ var pixelPainterModule = (function() {
   function paintColorClickEvent(e) {
 
     console.log(currentColor);
-    console.log(this.id + ' was clicked');
     this.style.backgroundColor = currentColor;
+
+    console.log(this.id + ' was clicked');
 
   }
 
+  //function to initialize the interface
+
   function _init() {
 
-    //make two grids one for the color swatch and one for the canvas
+    //make swatch grid
 
     _makeGrid('swatch', 4, 4);
+
+    //make canvas grid
+
     _makeGrid('canvas', 16, 16);
 
     //give the swatch its color
 
     _setSwatchColor();
+
+    //render option panel w/ buttons and current color headsUp display
+
+    _optionPanel();
 
   }
 

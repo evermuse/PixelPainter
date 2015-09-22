@@ -1,7 +1,17 @@
-#swatch           {display: inline-block;border: 1px solid gray;}
-.swatchRow        {}
-.swatchCell       {display: inline-block;width: 25px; height: 25px;background-color: #FFF;}
+/* swatch styles */
 
-#canvas           {display: inline-block;border: 1px solid gray;}
-.canvasRow        {}
-.canvasCell       {display: inline-block;width: 40px; height: 40px;background-color: #FFF;}
+#swatch               {display: inline-block;position: absolute;border: 1px solid gray;}
+.swatchRow            {}
+.swatchCell           {display: inline-block;width: 25px; height: 25px;background-color: #FFF;}
+
+/* option panel styles */
+
+#currentColorDisplay  {width: 100px;height: 25px;border: 1px solid gray;}
+.button               {width: 50px;height: 25px;}
+
+/* canvas styles */
+
+#canvas               {display: inline-block;margin-left: 200px;border: 1px solid gray;}
+.canvasRow            {}
+.canvasCell           {display: inline-block;width: 40px; height: 40px;background-color: #FFF;}
+
