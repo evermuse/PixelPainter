@@ -1,27 +1,218 @@
 @import url(http://fonts.googleapis.com/css?family=Sanchez);
 
+/* global styles */
+
+* {
+
+  font-family: 'Sanchez', serif;
+  background-color: #DEDFBE;
+
+}
+
+.button {
+
+  background-color: transparent;
+  border: 1px solid #575640;
+  color: #575640;
+
+}
+
+
 /* swatch section styles */
 
-#swatchSection        {display:block; width: 31%; height: 100%;background-color: #252117;}
-#titleHeading         {color: #F46922;font-family: 'Sanchez', serif;}
-#clearButton          {display:block;}
-#currentColorDisplay  {width: 98px;height: 25px;border: 1px solid gray;text-align: center;font-size: 20px;color:red;}
-.button               {width: 50px;height: 25px;text-align: center;}
+#swatchSection {
+
+  position: absolute;
+  width: 275px;
+  height: 100%;
+  background-color: #252117;
+  float:left;
+
+}
+
+#swatchHeader {
+
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+  background-color: transparent;
+
+
+}
+
+#logo {
+
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-color: transparent;
+
+}
+
+#titleHeading {
+
+  display: inline-block;
+  color: #F46922;
+  text-align: center;
+  font-size: 16pt;
+  padding: 20px 0px 0px 10px;
+  background-color: transparent;
+
+}
+
+#clearButton {
+
+  display: block;
+  margin: 0 auto;
+  width: 198px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+
+#clearButton:active {
+
+  position: relative;
+  top: 1px;
+
+}
 
 /* swatch styles */
 
-#swatch               {display: inline-block;position: absolute;border: 1px solid gray;}
-.swatchRow            {}
-.swatchCell           {display: inline-block;width: 25px; height: 25px;background-color: #FFF;}
+#swatch {
 
+  display: block;
+  text-align: center;
+  position: relative;
+  margin: 25px 0px 25px 0px;
+  background-color: transparent;
+
+}
+
+.swatchRow {
+
+
+}
+
+.swatchCell {
+
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  background-color: #FFF;
+
+}
+
+#optionDiv {
+
+  width: 198px;
+  height: 30px;
+  display: block;
+  margin: 0 auto;
+  background-color: transparent;
+
+}
+
+#eraseButton {
+
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-color: white;
+  background-image: url('/img/red-slash.svg');
+  vertical-align: top;
+  line-height: 64px;
+
+}
+
+#eraseButton:active {
+
+  position: relative;
+  top: 1px;
+
+}
+
+#currentColorDisplay  {
+
+  display: inline-block;
+  width: 62px;
+  height: 30px;
+  border: 1px solid #575640;
+  text-align: center;
+  font-size: 15px;
+  color:red;
+  vertical-align: top;
+  line-height: 30px;
+  background-color: transparent;
+
+}
+
+#undoButton {
+
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  background-color: transparent;
+  margin: 0px;
+  padding: 0px;
+  vertical-align: top;
+  line-height: 30px;
+  font-weight: bold;
+  font-size: 18px;
+
+}
+
+#undoImg {
+
+  width: 15px;
+  height: 15px;
+  text-align: left;
+  background-color: transparent;
+
+}
+
+#undoButton:active {
+
+  position: relative;
+  top: 1px;
+
+}
 
 /* canvas section styles */
 
-#canvasSection        {display:inline-block;background-color: #DEDFBE;}
+#canvasSection {
+
+  position: absolute;
+  height: 100%;
+  margin-left: 275px;
+  padding: 45px 50px 0px 25px;
+
+}
 
 /* canvas styles */
 
-#canvas               {display: inline-block;margin-left: 200px;border: 1px solid gray;}
-.canvasRow            {}
-.canvasCell           {display: inline-block;width: 20px; height: 20px;background-color: #FFF;}
+#canvas {
+
+  position: relative;
+  display: block;
+  margin-left: 20px;
+  border: 1px solid gray;
+
+}
+
+.canvasRow {
+
+}
+
+.canvasCell {
+
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #FFF;
+
+}
 

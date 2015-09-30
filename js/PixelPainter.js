@@ -70,16 +70,29 @@ var pixelPainterModule = (function() {
 
     //create swatch section
 
-    var swatchSection = document.createElement('swatchSection');
+    var swatchSection = document.createElement('section');
     swatchSection.id = 'swatchSection';
     document.body.appendChild(swatchSection);
+
+    //swatch section header
+
+    var swatchHeader = document.createElement('header');
+    swatchHeader.id = 'swatchHeader';
+    swatchSection.appendChild(swatchHeader);
+
+    //logo
+
+    var logo = document.createElement('img');
+    logo.id = 'logo';
+    logo.src = './img/logo.svg';
+    swatchHeader.appendChild(logo);
 
     //title heading
 
     var titleHeading = document.createElement('h1');
     titleHeading.id = 'titleHeading';
     titleHeading.innerHTML = 'PIXEL PAINTER';
-    swatchSection.appendChild(titleHeading);
+    swatchHeader.appendChild(titleHeading);
 
     //clear button
 
@@ -94,28 +107,43 @@ var pixelPainterModule = (function() {
 
     _makeGrid('swatch', 6, 6);
 
-    //display for currentColor
+    //options container
 
-    currentColorDisplay = document.createElement('div');
-    currentColorDisplay.id = 'currentColorDisplay';
-    swatchSection.appendChild(currentColorDisplay);
+    var optionDiv = document.createElement('div');
+    optionDiv.id = 'optionDiv';
+    swatchSection.appendChild(optionDiv);
 
     //erase button
 
     eraseButton = document.createElement('button');
     eraseButton.className = 'button';
+    eraseButton.id = 'eraseButton';
     eraseButton.value = 'off';
     eraseButton.addEventListener('click', _erase);
-    eraseButton.innerHTML = 'Erase';
-    swatchSection.appendChild(eraseButton);
+    optionDiv.appendChild(eraseButton);
+
+    //display for currentColor
+
+    currentColorDisplay = document.createElement('div');
+    currentColorDisplay.id = 'currentColorDisplay';
+    optionDiv.appendChild(currentColorDisplay);
 
     //undo button
 
     var undoButton = document.createElement('undo');
     undoButton.className = 'button';
+    undoButton.id = 'undoButton';
     undoButton.addEventListener('click', _undo);
-    undoButton.innerHTML = 'Undo';
-    swatchSection.appendChild(undoButton);
+
+    // var undoImg = document.createElement('img');
+    // undoImg.id = 'undoImg';
+    // undoImg.src = '/img/undo.svg';
+    // undoButton.appendChild(undoImg);
+
+    undoButton.innerHTML = "<img src='/img/undo.svg' id='undoImg'>&nbsp;UNDO";
+    optionDiv.appendChild(undoButton);
+
+
 
   }
 
@@ -196,7 +224,7 @@ var pixelPainterModule = (function() {
 
       eraseButton.value = 'on';
       currentColorDisplay.style.backgroundColor = 'white';
-      currentColorDisplay.innerHTML = 'Erase Mode';
+      currentColorDisplay.innerHTML = 'Erase';
 
     } else if (eraseButton.value === 'on') {
 
@@ -224,6 +252,12 @@ var pixelPainterModule = (function() {
   //undo functionality
 
   function _undo(target) {
+
+    if (paintHistory.length === 0) {
+
+      alert('Nothing to Undo!');
+
+    }
 
     var lastPixelPainted = paintHistory.pop();
     lastPixelPainted.style.backgroundColor = 'white';
