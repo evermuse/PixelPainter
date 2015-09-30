@@ -1,15 +1,20 @@
+/*jslint browser: true */
+'use strict';
+
 //create Module
 
 var pixelPainterModule = (function() {
 
   var module = {
 
+    makeSwatchSection : _makeSwatchSection,
+    makeCanvasSection : _makeCanvasSection,
     makeGrid : _makeGrid,
     setSwatchColor : _setSwatchColor,
     init : _init,
-    optionPanel : _optionPanel,
     erase : _erase,
-    clear : _clear
+    clear : _clear,
+    undo : _undo
 
   };
 
@@ -18,6 +23,7 @@ var pixelPainterModule = (function() {
   var currentColor = 'black';
   var currentColorDisplay;
   var eraseButton;
+  var paintHistory = [];
 
   //where the grids get made
 
@@ -44,9 +50,13 @@ var pixelPainterModule = (function() {
 
           gridCell.addEventListener('click', setColorClickEvent);
 
+          document.getElementById('swatchSection').appendChild(grid);
+
         } else {
 
           gridCell.addEventListener('click', paintColorClickEvent);
+
+          document.getElementById('canvasSection').appendChild(grid);
 
         }
 
@@ -54,7 +64,58 @@ var pixelPainterModule = (function() {
 
     }
 
-    document.getElementById('pixelPainter').appendChild(grid);
+  }
+
+  function _makeSwatchSection() {
+
+    //create swatch section
+
+    var swatchSection = document.createElement('swatchSection');
+    swatchSection.id = 'swatchSection';
+    document.body.appendChild(swatchSection);
+
+    //title heading
+
+    var titleHeading = document.createElement('h1');
+    titleHeading.id = 'titleHeading';
+    titleHeading.innerHTML = 'PIXEL PAINTER';
+    swatchSection.appendChild(titleHeading);
+
+    //clear button
+
+    var clearButton = document.createElement('button');
+    clearButton.className = 'button';
+    clearButton.id = 'clearButton';
+    clearButton.addEventListener('click', _clear);
+    clearButton.innerHTML = 'Start Fresh';
+    swatchSection.appendChild(clearButton);
+
+    //make and place swatch grid
+
+    _makeGrid('swatch', 6, 6);
+
+    //display for currentColor
+
+    currentColorDisplay = document.createElement('div');
+    currentColorDisplay.id = 'currentColorDisplay';
+    swatchSection.appendChild(currentColorDisplay);
+
+    //erase button
+
+    eraseButton = document.createElement('button');
+    eraseButton.className = 'button';
+    eraseButton.value = 'off';
+    eraseButton.addEventListener('click', _erase);
+    eraseButton.innerHTML = 'Erase';
+    swatchSection.appendChild(eraseButton);
+
+    //undo button
+
+    var undoButton = document.createElement('undo');
+    undoButton.className = 'button';
+    undoButton.addEventListener('click', _undo);
+    undoButton.innerHTML = 'Undo';
+    swatchSection.appendChild(undoButton);
 
   }
 
@@ -62,24 +123,44 @@ var pixelPainterModule = (function() {
 
   function _setSwatchColor() {
 
-    colorArray = [
+    var colorArray = [
 
-      'black',
-      'gray',
-      'silver',
-      'white',
-      'maroon',
-      'red',
-      'olive',
-      'yellow',
-      'green',
-      'lime',
-      'teal',
-      'aqua',
-      'navy',
-      'blue',
-      'purple',
-      'fuchsia'
+      '#8D722B',
+      '#D0EDFC',
+      '#84C8CB',
+      '#225667',
+      '#2E2B1F',
+      '#F16822',
+      '#14AABA',
+      '#BABB89',
+      '#EE3824',
+      '#655534',
+      '#225667',
+      '#B66D2F',
+      '#050709',
+      '#2B4321',
+      '#FBA91A',
+      '#F26822',
+      '#3EB86B',
+      '#777755',
+      '#5F8E40',
+      '#B7BF78',
+      '#777755',
+      '#AFBECF',
+      '#225667',
+      '#DEDFBE',
+      '#777755',
+      '#476569',
+      '#14212F',
+      '#57682E',
+      '#ACAF39',
+      '#57504B',
+      '#225667',
+      '#7F8835',
+      '#B66D2F',
+      '#57504B',
+      '#B75478',
+      '#BABB89'
 
     ];
 
@@ -93,32 +174,17 @@ var pixelPainterModule = (function() {
 
   }
 
-  //create option panel w/ buttons and current color headsUp display
+  function _makeCanvasSection() {
 
-  function _optionPanel() {
+    //create canvas section
 
-    //display for currentColor
+    var canvasSection = document.createElement('section');
+    canvasSection.id = 'canvasSection';
+    document.body.appendChild(canvasSection);
 
-    currentColorDisplay = document.createElement('div');
-    currentColorDisplay.id = 'currentColorDisplay';
-    swatch.appendChild(currentColorDisplay);
+    //make and place canvas grid
 
-    //erase button
-
-    eraseButton = document.createElement('button');
-    eraseButton.className = 'button';
-    eraseButton.value = 'off';
-    eraseButton.addEventListener('click', _erase);
-    eraseButton.innerHTML = 'Erase';
-    swatch.appendChild(eraseButton);
-
-    //clear button
-
-    var clearButton = document.createElement('button');
-    clearButton.className = 'button';
-    clearButton.addEventListener('click', _clear);
-    clearButton.innerHTML = 'Clear';
-    swatch.appendChild(clearButton);
+    _makeGrid('canvas', 30, 30);
 
   }
 
@@ -155,6 +221,15 @@ var pixelPainterModule = (function() {
 
   }
 
+  //undo functionality
+
+  function _undo(target) {
+
+    var lastPixelPainted = paintHistory.pop();
+    lastPixelPainted.style.backgroundColor = 'white';
+
+  }
+
   //sets currentColor to clicked cell
 
   function setColorClickEvent(e) {
@@ -182,6 +257,7 @@ var pixelPainterModule = (function() {
 
       this.style.backgroundColor = currentColor;
       console.log(currentColor);
+      paintHistory.push(e.target);
 
     }
 
@@ -191,21 +267,17 @@ var pixelPainterModule = (function() {
 
   function _init() {
 
-    //make swatch grid
+    //make swatch section
 
-    _makeGrid('swatch', 4, 4);
+    _makeSwatchSection();
 
-    //make canvas grid
+    //make canvas section
 
-    _makeGrid('canvas', 25, 25);
+    _makeCanvasSection();
 
     //give the swatch its color
 
     _setSwatchColor();
-
-    //render option panel w/ buttons and current color headsUp display
-
-    _optionPanel();
 
   }
 
