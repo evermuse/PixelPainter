@@ -103,10 +103,17 @@
 
 .swatchCell {
 
+  box-sizing: border-box;
   display: inline-block;
   width: 33px;
   height: 33px;
   background-color: #FFF;
+
+}
+
+.swatchCell:hover {
+
+  border: 3px solid #F13614;
 
 }
 
