@@ -223,13 +223,13 @@ var pixelPainterModule = (function() {
     if (!isMouseDown) {
 
       isMouseDown = true;
-      console.log('the mouse is down', isMouseDown);
+      console.log('isMouseDown is', isMouseDown);
       return;
 
     } else {
 
       isMouseDown = false;
-      console.log('the mouse is up', isMouseDown);
+      console.log('isMouseDown is', isMouseDown);
       return;
 
     }
@@ -250,6 +250,7 @@ var pixelPainterModule = (function() {
 
       eraseButton.value = 'off';
       currentColorDisplay.innerHTML = '';
+      currentColorDisplay.style.backgroundColor = '#252117';
 
     }
 
