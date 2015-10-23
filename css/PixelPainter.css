@@ -7,6 +7,10 @@
   font-family: 'Sanchez', serif;
   background-color: #DEDFBE;
 
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
 }
 
 .button {
@@ -14,6 +18,7 @@
   background-color: transparent;
   border: 1px solid #575640;
   color: #575640;
+  cursor: pointer;
 
 }
 
@@ -68,7 +73,6 @@
   height: 40px;
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
 
 }
 
@@ -88,6 +92,7 @@
   position: relative;
   margin: 25px 0px 25px 0px;
   background-color: transparent;
+  cursor: pointer;
 
 }
 
@@ -121,7 +126,7 @@
   height: 32px;
   display: inline-block;
   background-color: white;
-  background-image: url('/img/red-slash.svg');
+  background-image: url('../img/red-slash.svg');
   vertical-align: top;
   line-height: 64px;
 
@@ -152,25 +157,20 @@
 #undoButton {
 
   display: inline-block;
-  width: 100px;
+  width: 85px;
   height: 30px;
   text-align: center;
-  background-color: transparent;
   margin: 0px;
-  padding: 0px;
+  padding: 0px 0px 0px 15px;
   vertical-align: top;
   line-height: 30px;
   font-weight: bold;
   font-size: 18px;
-
-}
-
-#undoImg {
-
-  width: 15px;
-  height: 15px;
-  text-align: left;
-  background-color: transparent;
+  background-image: url('../img/undo.svg');
+  -webkit-background-size: 15px;
+  background-size: 15px;
+  background-position: 10% 40%;
+  background-repeat: no-repeat;
 
 }
 
@@ -200,6 +200,7 @@
   display: block;
   margin-left: 20px;
   border: 1px solid gray;
+  min-width: 600px;
 
 }
 

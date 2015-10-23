@@ -12,6 +12,7 @@ var pixelPainterModule = (function() {
     makeGrid : _makeGrid,
     setSwatchColor : _setSwatchColor,
     init : _init,
+    draw : _draw,
     erase : _erase,
     clear : _clear,
     undo : _undo
@@ -24,6 +25,7 @@ var pixelPainterModule = (function() {
   var currentColorDisplay;
   var eraseButton;
   var paintHistory = [];
+  var isMouseDown = false;
 
   //where the grids get made
 
@@ -55,6 +57,10 @@ var pixelPainterModule = (function() {
         } else {
 
           gridCell.addEventListener('click', paintColorClickEvent);
+          gridCell.addEventListener('mouseenter', paintColorDragEvent);
+
+          grid.addEventListener('mousedown', _draw);
+          grid.addEventListener('mouseup', _draw);
 
           document.getElementById('canvasSection').appendChild(grid);
 
@@ -134,16 +140,8 @@ var pixelPainterModule = (function() {
     undoButton.className = 'button';
     undoButton.id = 'undoButton';
     undoButton.addEventListener('click', _undo);
-
-    // var undoImg = document.createElement('img');
-    // undoImg.id = 'undoImg';
-    // undoImg.src = '/img/undo.svg';
-    // undoButton.appendChild(undoImg);
-
-    undoButton.innerHTML = "<img src='/img/undo.svg' id='undoImg'>&nbsp;UNDO";
+    undoButton.textContent = 'UNDO';
     optionDiv.appendChild(undoButton);
-
-
 
   }
 
@@ -216,6 +214,28 @@ var pixelPainterModule = (function() {
 
   }
 
+  //draw functionality derived from current mouse status on the canvas
+
+  function _draw(e) {
+
+    //var startCell = e.target;
+
+    if (!isMouseDown) {
+
+      isMouseDown = true;
+      console.log('the mouse is down', isMouseDown);
+      return;
+
+    } else {
+
+      isMouseDown = false;
+      console.log('the mouse is up', isMouseDown);
+      return;
+
+    }
+
+  }
+
   //erases the current cell
 
   function _erase() {
@@ -247,6 +267,8 @@ var pixelPainterModule = (function() {
 
     }
 
+    currentColorDisplay.style.backgroundColor = '#252117';
+
   }
 
   //undo functionality
@@ -266,7 +288,7 @@ var pixelPainterModule = (function() {
 
   //sets currentColor to clicked cell
 
-  function setColorClickEvent(e) {
+  function setColorClickEvent() {
 
     currentColor = this.style.backgroundColor;
     console.log(currentColor);
@@ -288,6 +310,25 @@ var pixelPainterModule = (function() {
       console.log(currentColor + ' erased');
 
     } else {
+
+      this.style.backgroundColor = currentColor;
+      console.log(currentColor);
+      paintHistory.push(e.target);
+
+    }
+
+  }
+
+  function paintColorDragEvent(e) {
+
+    console.log(this.id + ' was clicked');
+
+    if (eraseButton.value === 'on') {
+
+      this.style.backgroundColor = 'white';
+      console.log(currentColor + ' erased');
+
+    } else if (isMouseDown) {
 
       this.style.backgroundColor = currentColor;
       console.log(currentColor);
